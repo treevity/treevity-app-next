@@ -1,7 +1,7 @@
+import 'css/main.sass';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import '../assets/css/main.sass';
 
 export default class TrevApp extends App {
     public static async getInitialProps({ ctx, Component }: AppContext) {
