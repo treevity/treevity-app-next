@@ -1,0 +1,12 @@
+{
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
+    "rules": {
+        "interface-name": false,
+        "no-console": [false],
+        "no-implicit-dependencies": false,
+        "quotemark": [true, "single", "jsx-double"]
+    }
+}
