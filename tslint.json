@@ -9,6 +9,7 @@
         "no-implicit-dependencies": false,
         "quotemark": [true, "single", "jsx-double"],
         "no-submodule-imports": [false],
-        "max-line-length": [false]
+        "max-line-length": [false],
+        "no-var-requires": false
     }
 }

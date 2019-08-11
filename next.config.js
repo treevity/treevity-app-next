@@ -5,6 +5,7 @@ module.exports = withSass({
     webpack (config, options) {
         config.resolve.alias['components'] = path.join(__dirname, 'components');
         config.resolve.alias['css'] = path.join(__dirname, 'assets/css');
+        config.resolve.alias['~'] = path.join(__dirname, '');
         return config;
     }
 });

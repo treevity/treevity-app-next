@@ -2,8 +2,9 @@ import 'css/main.sass';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import NextI18Instance from '~/i18n';
 
-export default class TrevApp extends App {
+class TrevApp extends App {
     public static async getInitialProps({ ctx, Component }: AppContext) {
         let pageProps = {};
 
@@ -11,7 +12,7 @@ export default class TrevApp extends App {
             pageProps = await Component.getInitialProps(ctx);
         }
 
-        return { pageProps };
+        return { pageProps, namespacesRequired: ['common'] };
     }
 
     public render() {
@@ -27,3 +28,5 @@ export default class TrevApp extends App {
         );
     }
 }
+
+export default NextI18Instance.appWithTranslation(TrevApp);
