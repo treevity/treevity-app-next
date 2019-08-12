@@ -1,5 +1,5 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
-import * as React from 'react';
+import React from 'react';
 
 class MyDocument extends Document {
     public static async getInitialProps(ctx: DocumentContext) {

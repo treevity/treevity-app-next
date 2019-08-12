@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd';
 import { NextPage } from 'next';
-import * as React from 'react';
-import NextI18Instance from '~/i18n';
+import React from 'react';
+import { withTranslation } from '~/i18n';
 
 const Home: NextPage = ({ t }: any) => (
     <Row>
@@ -14,4 +14,8 @@ const Home: NextPage = ({ t }: any) => (
     </Row>
 );
 
-export default NextI18Instance.withTranslation('common')(Home);
+Home.getInitialProps = async () => ({
+    namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(Home);

@@ -2,7 +2,7 @@ import 'css/main.sass';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import NextI18Instance from '~/i18n';
+import { appWithTranslation } from '~/i18n';
 
 class TrevApp extends App {
     public static async getInitialProps({ ctx, Component }: AppContext) {
@@ -29,4 +29,4 @@ class TrevApp extends App {
     }
 }
 
-export default NextI18Instance.appWithTranslation(TrevApp);
+export default appWithTranslation(TrevApp);
