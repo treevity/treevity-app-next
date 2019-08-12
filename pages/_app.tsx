@@ -2,10 +2,15 @@ import 'css/main.sass';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import { ApolloProvider } from 'react-apollo';
 import { appWithTranslation } from '~/i18n';
 import { appWithApollo } from '~/lib/apollo';
 
-class TrevApp extends App {
+interface Props {
+    apollo: any;
+}
+
+class TrevApp extends App<Props> {
     public static async getInitialProps({ ctx, Component }: AppContext) {
         let pageProps = {};
 
@@ -17,14 +22,16 @@ class TrevApp extends App {
     }
 
     public render() {
-        const { Component, pageProps } = this.props;
+        const { Component, pageProps, apollo } = this.props;
 
         return (
             <Container>
-                <Head>
-                    <title>Treevity</title>
-                </Head>
-                <Component {...pageProps} />
+                <ApolloProvider client={apollo}>
+                    <Head>
+                        <title>Treevity</title>
+                    </Head>
+                    <Component {...pageProps} />
+                </ApolloProvider>
             </Container>
         );
     }
