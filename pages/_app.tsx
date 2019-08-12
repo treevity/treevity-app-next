@@ -3,6 +3,7 @@ import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import { appWithTranslation } from '~/i18n';
+import { appWithApollo } from '~/lib/apollo';
 
 class TrevApp extends App {
     public static async getInitialProps({ ctx, Component }: AppContext) {
@@ -29,4 +30,7 @@ class TrevApp extends App {
     }
 }
 
-export default appWithTranslation(TrevApp);
+const wTranslation = appWithTranslation(TrevApp);
+const wApollo = appWithApollo(wTranslation);
+
+export default wApollo;
