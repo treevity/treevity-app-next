@@ -10,6 +10,8 @@
         "quotemark": [true, "single", "jsx-double"],
         "no-submodule-imports": [false],
         "max-line-length": [false],
-        "no-var-requires": false
+        "no-var-requires": false,
+        "jsx-no-lambda": false,
+        "no-shadowed-variable": false
     }
 }

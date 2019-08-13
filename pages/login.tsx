@@ -1,27 +1,17 @@
 import { useMutation } from '@apollo/react-hooks';
 import { Col, Row } from 'antd';
-import gql from 'graphql-tag';
 import { NextPage } from 'next';
 import React, { Fragment, useState } from 'react';
 import { withTranslation } from '~/i18n';
+import { getErrors, LOGIN_USER  } from '~/lib/apollo';
+import { logUser } from '~/lib/auth';
 import { NextPageContext } from '~/lib/interfaces';
 
-const LOGIN_USER = gql`
-    mutation login($email: String!, $password: String!) {
-        login(loginData: { email: $email, password: $password }) {
-            accessToken,
-            expiresIn
-        }
-    }
-`;
-
 const Login: NextPage = ({ t }: any) => {
-    const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
-        onCompleted: (responseData) => {
-            console.log('logged', responseData);
-        },
-        onError: (responseError) => {
-            console.log('error', responseError);
+    const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+        onCompleted: logUser,
+        onError: (error) => {
+            console.log(getErrors(error));
         },
     });
     const [email, setEmail] = useState('');
