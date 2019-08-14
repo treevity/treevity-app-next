@@ -6,11 +6,10 @@ import { withApollo } from 'react-apollo';
 import * as recompose from 'recompose';
 import { withTranslation } from '~/i18n';
 import { getErrors, LOGIN_USER  } from '~/lib/apollo';
-import { AuthStrategy } from '~/lib/auth';
+import { withAuth } from '~/lib/auth';
 import { NextPageContext } from '~/lib/interfaces';
 
-const Login: NextPage = ({ t, client }: any) => {
-    const auth = new AuthStrategy(client);
+const Login: NextPage = ({ t, auth }: any) => {
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         onCompleted: (data) => {
             auth.login(data);
@@ -55,4 +54,4 @@ Login.getInitialProps = async (ctx: NextPageContext) => {
     };
 };
 
-export default recompose.compose(withTranslation('login'), withApollo)(Login);
+export default recompose.compose(withTranslation('login'), withApollo, withAuth)(Login);
