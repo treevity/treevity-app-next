@@ -3,14 +3,15 @@ import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
+import * as recompose from 'recompose';
 import { appWithTranslation } from '~/i18n';
-import { appWithApollo } from '~/lib/apollo';
+import withApollo from '~/lib/apollo/withApollo';
 
 interface Props {
-    apollo: any;
+    apolloClient: any;
 }
 
-class TrevApp extends App<Props> {
+class MyApp extends App<Props> {
     public static async getInitialProps({ ctx, Component }: AppContext) {
         let pageProps = {};
 
@@ -22,11 +23,11 @@ class TrevApp extends App<Props> {
     }
 
     public render() {
-        const { Component, pageProps, apollo } = this.props;
+        const { Component, pageProps, apolloClient } = this.props;
 
         return (
             <Container>
-                <ApolloProvider client={apollo}>
+                <ApolloProvider client={apolloClient}>
                     <Head>
                         <title>Treevity</title>
                     </Head>
@@ -37,7 +38,4 @@ class TrevApp extends App<Props> {
     }
 }
 
-const wTranslation = appWithTranslation(TrevApp);
-const wApollo = appWithApollo(wTranslation);
-
-export default wApollo;
+export default recompose.compose(appWithTranslation, withApollo)(MyApp as any);
