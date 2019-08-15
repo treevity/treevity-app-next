@@ -1,3 +1,4 @@
+import { ApolloClient } from 'apollo-boost';
 import 'css/main.sass';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
@@ -5,10 +6,10 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as recompose from 'recompose';
 import { appWithTranslation } from '~/i18n';
-import withApollo from '~/lib/apollo/withApollo';
+import { withApollo } from '~/lib/apollo';
 
 interface Props {
-    apolloClient: any;
+    apolloClient: ApolloClient<any>;
 }
 
 class MyApp extends App<Props> {

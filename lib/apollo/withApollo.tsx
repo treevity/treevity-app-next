@@ -4,14 +4,14 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { getDataFromTree } from 'react-apollo';
+import { isBrowser } from '~/utils/helpers';
 import initApollo from './initApollo';
-import { isBrowser } from './isBrowser';
 
 function parseCookies(req?: any, options = {}) {
     return cookie.parse(req ? req.headers.cookie || '' : document.cookie, options);
 }
 
-export default (App: any) => {
+export const withApollo = (App: any) => {
     return class WithData extends React.Component {
         private static displayName = `WithData(${App.displayName})`;
         private static propTypes = {

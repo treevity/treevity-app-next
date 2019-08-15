@@ -4,7 +4,7 @@ import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
 import getConfig from 'next/config';
 import { ApolloOptions } from '~/lib/interfaces';
-import { isBrowser } from './isBrowser';
+import { isBrowser } from '~/utils/helpers';
 
 const { publicRuntimeConfig } = getConfig();
 const { API_URL, authSettings } = publicRuntimeConfig;
