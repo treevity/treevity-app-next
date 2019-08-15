@@ -2,14 +2,17 @@ import { useMutation } from '@apollo/react-hooks';
 import { Col, Row } from 'antd';
 import { NextPage } from 'next';
 import React, { Fragment, useState } from 'react';
+import { withApollo } from 'react-apollo';
+import * as recompose from 'recompose';
 import { withTranslation } from '~/i18n';
-import { getErrors, loginMutation } from '~/lib/apollo';
+import { getErrors } from '~/lib/apollo';
+import { loginMutation, saveToken } from '~/lib/auth';
 import { NextPageContext } from '~/lib/interfaces';
 
-const Login: NextPage = (/* { t, auth } */ props: any) => {
+const Login: NextPage = (props: any) => {
     const [loginUser, { loading }] = useMutation(loginMutation, {
         onCompleted: (data: any) => {
-            console.log(data);
+            saveToken(data, props.client);
         },
         onError: (error: any) => {
             console.log(getErrors(error));
@@ -51,4 +54,4 @@ Login.getInitialProps = async (ctx: NextPageContext) => {
     };
 };
 
-export default withTranslation('login')(Login);
+export default recompose.compose(withTranslation('login'), withApollo)(Login);

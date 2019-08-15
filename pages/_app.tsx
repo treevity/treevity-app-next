@@ -7,6 +7,7 @@ import { ApolloProvider } from 'react-apollo';
 import * as recompose from 'recompose';
 import { appWithTranslation } from '~/i18n';
 import { withApollo } from '~/lib/apollo';
+import { withAuth } from '~/lib/auth';
 
 interface Props {
     apolloClient: ApolloClient<any>;
@@ -39,4 +40,4 @@ class MyApp extends App<Props> {
     }
 }
 
-export default recompose.compose(appWithTranslation, withApollo)(MyApp as any);
+export default recompose.compose(appWithTranslation, withApollo, withAuth)(MyApp as any);
