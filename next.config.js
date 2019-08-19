@@ -8,6 +8,11 @@ module.exports = withSass({
             headerName: 'Authorization',
             tokenType: 'Bearer'
         },
+        routes: {
+            home: '/',
+            login: '/login',
+            register: '/register'
+        }
     },
     webpack (config, options) {
         config.resolve.alias['components'] = path.join(__dirname, 'components');

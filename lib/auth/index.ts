@@ -13,11 +13,10 @@ export const checkLoggedIn = async (apolloClient: ApolloClient<any>) => {
         const response = await apolloClient.query({
             query: currentUserQuery,
         });
-        console.log(response);
-        return { loggedInUser: {} };
+        return { loggedInUser: response.data.currentUser };
     } catch (error) {
         console.log(getErrors(error));
-        return { loggedInUser: {} };
+        return { loggedInUser: null };
     }
 };
 
