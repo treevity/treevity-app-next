@@ -5,10 +5,12 @@ import Head from 'next/head';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as recompose from 'recompose';
+import { ThemeProvider } from 'styled-components';
 import { appWithTranslation } from '~/i18n';
 import { withApollo } from '~/lib/apollo';
 import { withAuth } from '~/lib/auth';
 
+const theme = require('sass-extract-loader?{"plugins": ["sass-extract-js"]}!../assets/css/variables.scss');
 interface Props {
     apolloClient: ApolloClient<any>;
 }
@@ -29,12 +31,14 @@ class MyApp extends App<Props> {
 
         return (
             <Container>
-                <ApolloProvider client={apolloClient}>
-                    <Head>
-                        <title>Treevity</title>
-                    </Head>
-                    <Component {...pageProps} />
-                </ApolloProvider>
+                <ThemeProvider theme={theme}>
+                    <ApolloProvider client={apolloClient}>
+                        <Head>
+                            <title>Treevity</title>
+                        </Head>
+                        <Component {...pageProps} />
+                    </ApolloProvider>
+                </ThemeProvider>
             </Container>
         );
     }
