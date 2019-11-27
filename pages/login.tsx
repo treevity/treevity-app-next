@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
-import { Col } from 'antd';
+import { Alert, Col } from 'antd';
 import { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import { withApollo } from 'react-apollo';
 import * as recompose from 'recompose';
 import styled from 'styled-components';
@@ -31,6 +31,14 @@ const Header = styled.div`
         margin: 0;
     }
 `;
+const StyledAlert = styled(Alert)`
+    margin-top: ${(props) => props.theme.formPadding};
+    margin-bottom: ${(props) => props.theme.formPadding};
+    text-align: left;
+`;
+const ErrorsList = styled.ul`
+    margin-bottom: 0;
+`;
 
 const Login: NextPage = (props: any) => {
     const [loginUser, { loading }] = useMutation(loginMutation, {
@@ -38,15 +46,22 @@ const Login: NextPage = (props: any) => {
             await saveToken(data, props.client);
         },
         onError: (error: any) => {
-            console.log(getErrors(error));
+            setErrors(getErrors(error));
         },
     });
+    const [errors, setErrors] = useState([]);
+    let errorsList = null;
+    if (errors.length) {
+        errorsList = errors.map((error) => <li key={error}>{error}</li>);
+        errorsList = <ErrorsList>{errorsList}</ErrorsList>;
+    }
 
     return (
         <LoginFormWrapper span={9}>
             <Header>
                 <h1>{props.t('title')}</h1>
             </Header>
+            {errors.length > 0 && <StyledAlert message={errorsList} type="error" showIcon={true} />}
             <LoginForm loginHandler={loginUser} loading={loading} />
         </LoginFormWrapper>
     );
