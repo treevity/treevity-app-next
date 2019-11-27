@@ -1,5 +1,5 @@
 import { ApolloClient } from 'apollo-boost';
-import 'css/main.sass';
+import 'css/main.scss';
 import App, { AppContext, Container } from 'next/app';
 import Head from 'next/head';
 import React from 'react';

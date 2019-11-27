@@ -27,5 +27,5 @@ export const saveToken = async (data: any, apolloClient: ApolloClient<any>) => {
     });
 
     await apolloClient.cache.reset();
-    redirect({}, '/');
+    await redirect({}, '/');
 };
