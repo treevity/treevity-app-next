@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
-import { Alert, Col } from 'antd';
+import { Alert, Col, message } from 'antd';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { withApollo } from 'react-apollo';
@@ -44,6 +44,7 @@ const Login: NextPage = (props: any) => {
     const [loginUser, { loading }] = useMutation(loginMutation, {
         onCompleted: async (data: any) => {
             await saveToken(data, props.client);
+            message.success('You have been successfully logged into system.');
         },
         onError: (error: any) => {
             setErrors(getErrors(error));
