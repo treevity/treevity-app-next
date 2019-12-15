@@ -1,5 +1,6 @@
 {
     "hello-world": "Ahoj světe!",
     "error-with-status": "Nastala chyba: {{statusCode}}",
-    "error-without-status": "Na serveru nastala chyba"
+    "error-without-status": "Na serveru nastala chyba",
+    "user": "Uživatel"
 }
